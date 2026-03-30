@@ -1,0 +1,11 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[[services]]
+name = "api"
+startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+
+[[services]]
+name = "worker"
+startCommand = "celery -A main.celery_app worker --loglevel=info --concurrency=2"
